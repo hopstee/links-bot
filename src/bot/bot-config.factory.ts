@@ -19,18 +19,21 @@ export const options = (): TelegrafModuleAsyncOptions => {
 
             if (isProd) {
                 try {
-                    const setRes = await fetch(`https://api.telegram.org/bot${token}/setWebhook`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ url: fullWebhookUrl }),
-                    });
-
-                    const setData = await setRes.json();
-                    console.log('[Webhook setWebhook]', setData);
-
                     const infoRes = await fetch(`https://api.telegram.org/bot${token}/getWebhookInfo`);
                     const infoData = await infoRes.json();
-                    console.log('[Webhook getWebhookInfo]', infoData);
+
+                    if (infoData.result?.url !== fullWebhookUrl) {
+                        console.log(`[Webhook] Setting webhook: ${fullWebhookUrl}`);
+                        const setRes = await fetch(`https://api.telegram.org/bot${token}/setWebhook`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ url: fullWebhookUrl }),
+                        });
+                        const setData = await setRes.json();
+                        console.log('[Webhook setWebhook]', setData);
+                    } else {
+                        console.log(`[Webhook] Webhook already set: ${infoData.result.url}`);
+                    }
                 } catch (error) {
                     console.error('[Webhook Error]', error);
                 }
