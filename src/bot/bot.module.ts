@@ -8,6 +8,7 @@ import { options } from './bot-config.factory'
 import { GetLinkScene } from './scenes/get.link.scene'
 import { AddLinkScene } from './scenes/add.link.scene'
 import { DeleteLinkScene } from './scenes/delete.link.scene'
+import { BotController } from './controllers/bot.controller'
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { DeleteLinkScene } from './scenes/delete.link.scene'
         AddLinkScene,
         DeleteLinkScene,
     ],
+    controllers: [BotController],
     exports: [BotService],
 })
 export class BotModule {}
