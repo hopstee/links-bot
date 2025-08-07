@@ -14,7 +14,7 @@ export class BotService extends Telegraf {
         private userService: UserService,
         private linkService: LinkService,
     ) {
-        super(configService.get('TELEGRAM_BOT_TOKEN'))
+        super(configService.get('TELEGRAM_BOT_API_TOKEN'))
     }
 
     @Start()

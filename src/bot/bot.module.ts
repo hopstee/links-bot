@@ -23,6 +23,6 @@ import { BotController } from './controllers/bot.controller'
         DeleteLinkScene,
     ],
     controllers: [BotController],
-    exports: [BotService],
+    exports: [BotService, TelegrafModule],
 })
 export class BotModule {}
