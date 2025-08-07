@@ -9,8 +9,8 @@ export const options = (): TelegrafModuleAsyncOptions => {
             const isProd = config.get('NODE_ENV') === 'production';
             const token = config.get<string>('TELEGRAM_BOT_API_TOKEN');
             const domain = config.get<string>('WEBHOOK_DOMAIN');
-            const hookPath = `/bot${token}`;
-            const fullWebhookUrl = `${domain}${hookPath}`;
+            const hookPath = `/bot-webhook`;
+            const fullWebhookUrl = new URL(hookPath, domain).toString();
 
             const baseConfig = {
                 token,
