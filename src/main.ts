@@ -1,12 +1,11 @@
 import { NestFactory } from '@nestjs/core'
-import { TelegrafModule } from 'nestjs-telegraf'
 
 import { AppModule } from './app.module'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    const bot = TelegrafModule.getBot();
+    const bot = app.get('TELEGRAM_BOT');
 
     const hookPath = '/bot-webhook';
 
